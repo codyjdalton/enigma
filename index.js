@@ -7,7 +7,7 @@ class Enigma {
             'BDFHJLCPRTXVZNYEIWGAKMUSQO'
         ];
         this.reflector = this.rotorAlphabet[ this.rotorAlphabet.length - 1 ].split('').reverse().join('');
-        this.roterSettings = [ 1, 0, 0];
+        this.roterSettings = [ 3, 4, 10];
     }
 
     encrypt(text) {
@@ -46,7 +46,6 @@ class Enigma {
         let i = 0;
         
         while(i < this.rotorAlphabet.length) {
-            console.log(newIdx);
             newIdx = this.getAdjustedIndex(newIdx, i);
             lastChar = this.rotorAlphabet[i][newIdx];
             i++;
@@ -58,12 +57,11 @@ class Enigma {
 
         while(i > -1) {
             newIdx = this.getAdjustedIndex(newIdx, i, -1);
-            console.log(newIdx);
             lastChar = this.rotorAlphabet[i][newIdx];
             i--;
         }
 
-        return  lastChar;
+        return lastChar;
     }
 
     incrementRotor() {
@@ -73,4 +71,4 @@ class Enigma {
 
 const anEnigma = new Enigma();
 
-console.log(anEnigma.encrypt('CODE'))
+console.log(anEnigma.encrypt('this is another code'))
