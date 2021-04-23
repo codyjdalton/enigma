@@ -1,13 +1,13 @@
 class Enigma {
 
-    constructor() {
+    constructor(rotorSettingsInput = [0, 0, 0]) {
         this.rotorAlphabet = [
             'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
             'AJDKSIRUXBLHWTMCQGZNPYFVOE',
             'BDFHJLCPRTXVZNYEIWGAKMUSQO'
         ];
         this.reflector = this.rotorAlphabet[ this.rotorAlphabet.length - 1 ].split('').reverse().join('');
-        this.roterSettings = [ 3, 4, 10];
+        this.rotorSettings = rotorSettingsInput;
     }
 
     encrypt(text) {
@@ -26,11 +26,13 @@ class Enigma {
             }
         ).join('');
 
+        console.log(this.rotorSettings);
+
         return result;
     }
 
     getAdjustedIndex(position, rotorIdx, inverse = 1) {
-        const offset = this.roterSettings[rotorIdx];
+        const offset = this.rotorSettings[rotorIdx];
         const corrected = position + (offset * inverse);
         let result =  corrected < 26 ? corrected : corrected - 26;
 
@@ -65,10 +67,28 @@ class Enigma {
     }
 
     incrementRotor() {
-       this.roterSettings[0] = this.roterSettings[0] + 1;
+
+       let currentRotor = 0;
+       let done = false;
+
+       while(!done) {
+        if(this.rotorSettings[currentRotor] === 25) {
+            this.rotorSettings[currentRotor] = 0;
+
+            if(this.rotorSettings[currentRotor + 1] !== undefined) {
+                currentRotor = currentRotor + 1;
+            } else {
+                currentRotor = 0;
+                done = true;
+            }
+        } else {
+            this.rotorSettings[currentRotor] = this.rotorSettings[currentRotor] + 1;
+            done = true;
+        }
+       }
     }
 }
 
-const anEnigma = new Enigma();
+const anEnigma = new Enigma([ 5, 8, 9 ]);
 
-console.log(anEnigma.encrypt('this is another code'))
+console.log(anEnigma.encrypt('hey this is an encrypted sentence'))
