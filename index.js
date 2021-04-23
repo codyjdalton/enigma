@@ -1,6 +1,8 @@
 class Enigma {
 
-    constructor(rotorSettingsInput = [0, 0, 0]) {
+    constructor(
+        rotorSettingsInput = [0, 0, 0],
+        plugboardSettingsInput = '') {
         this.rotorAlphabet = [
             'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
             'AJDKSIRUXBLHWTMCQGZNPYFVOE',
@@ -8,6 +10,7 @@ class Enigma {
         ];
         this.reflector = this.rotorAlphabet[ this.rotorAlphabet.length - 1 ].split('').reverse().join('');
         this.rotorSettings = rotorSettingsInput;
+        this.plugboardSettings = plugboardSettingsInput;
     }
 
     encrypt(text) {
@@ -25,8 +28,6 @@ class Enigma {
                 return this.getRotorCharacter(part);
             }
         ).join('');
-
-        console.log(this.rotorSettings);
 
         return result;
     }
