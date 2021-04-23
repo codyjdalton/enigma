@@ -3,6 +3,8 @@ class Enigma {
     constructor(
         rotorSettingsInput = [0, 0, 0],
         plugboardSettingsInput = '') {
+
+        // 1. prepare rotors
         this.rotorAlphabet = [
             'EKMFLGDQVZNTOWYHXUSPAIBRCJ',
             'AJDKSIRUXBLHWTMCQGZNPYFVOE',
@@ -10,7 +12,26 @@ class Enigma {
         ];
         this.reflector = this.rotorAlphabet[ this.rotorAlphabet.length - 1 ].split('').reverse().join('');
         this.rotorSettings = rotorSettingsInput;
+
+        // 2. prepare plugboard
         this.plugboardSettings = plugboardSettingsInput;
+        this.plugboard = {};
+        this.setPlugboard();
+    }
+
+    setPlugboard() {
+        const pairs = this.plugboardSettings.split(' ');
+        pairs.forEach(
+            pair => {
+                const first = pair[0].toUpperCase();
+                const second = pair[1].toUpperCase();
+
+                this.plugboard[first] = second;
+                this.plugboard[second] = first;
+            }
+        );
+
+        console.log(this.plugboard)
     }
 
     encrypt(text) {
@@ -21,11 +42,13 @@ class Enigma {
         const result = parts.map(
             (part) => {
 
+                part = this.applyPlugboard(part);
+
                 // increment rotor setting
                 this.incrementRotor();
 
                 // return offset character
-                return this.getRotorCharacter(part);
+                return this.applyPlugboard( this.getRotorCharacter(part) );
             }
         ).join('');
 
@@ -67,6 +90,13 @@ class Enigma {
         return lastChar;
     }
 
+    applyPlugboard(character) {
+
+        let result = this.plugboard[character];
+
+        return result ? result : character;
+    }
+
     incrementRotor() {
 
        let currentRotor = 0;
@@ -90,6 +120,8 @@ class Enigma {
     }
 }
 
-const anEnigma = new Enigma([ 5, 8, 9 ]);
+const aEnigma = new Enigma([ 5, 10, 9 ], 'ea bc df hi km zt xp ln');
+const bEnigma = new Enigma([ 5, 10, 9 ], 'ea bc df hi km zt xp ln');
 
-console.log(anEnigma.encrypt('hey this is an encrypted sentence'))
+console.log(aEnigma.encrypt('HITHISISANENCRYPTEDSENTENCE'))
+console.log(bEnigma.encrypt('FLYANJAHZGWMQNZQOJYRUGBZJGG'))
