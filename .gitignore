@@ -1,0 +1,14 @@
+# dependencies
+/node_modules
+
+# reports
+/coverage
+/.nyc_output
+
+# distributions
+/dist
+
+# system files
+.DS_Store
+
+/.env

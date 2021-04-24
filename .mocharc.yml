@@ -1,0 +1,4 @@
+full-trace: true
+spec: '**/*.spec.js'
+bail: true
+slow: 2000

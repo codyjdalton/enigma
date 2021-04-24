@@ -1,0 +1,40 @@
+{
+  "name": "enigma",
+  "version": "1.0.0",
+  "description": "",
+  "main": "enigma.js",
+  "scripts": {
+    "test": "nyc mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0"
+  },
+  "nyc": {
+    "include": [
+      "**/*.js"
+    ],
+    "exclude": [
+      "**/*.spec.js"
+    ],
+    "extension": [
+      ".js"
+    ],
+    "reporter": [
+      "text-summary",
+      "html",
+      "lcov"
+    ],
+    "check-coverage": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "sourceMap": true,
+    "instrument": true
+  }
+}

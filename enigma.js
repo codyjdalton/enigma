@@ -1,3 +1,6 @@
+/**
+ * Class Declaration
+ */
 class Enigma {
 
     constructor(
@@ -23,15 +26,15 @@ class Enigma {
         const pairs = this.plugboardSettings.split(' ');
         pairs.forEach(
             pair => {
-                const first = pair[0].toUpperCase();
-                const second = pair[1].toUpperCase();
-
-                this.plugboard[first] = second;
-                this.plugboard[second] = first;
+                if(pair[0]) {
+                    const first = pair[0].toUpperCase();
+                    const second = pair[1].toUpperCase();
+    
+                    this.plugboard[first] = second;
+                    this.plugboard[second] = first;
+                }
             }
         );
-
-        console.log(this.plugboard)
     }
 
     encrypt(text) {
@@ -120,8 +123,6 @@ class Enigma {
     }
 }
 
-const aEnigma = new Enigma([ 5, 10, 9 ], 'ea bc df hi km zt xp ln');
-const bEnigma = new Enigma([ 5, 10, 9 ], 'ea bc df hi km zt xp ln');
-
-console.log(aEnigma.encrypt('HITHISISANENCRYPTEDSENTENCE'))
-console.log(bEnigma.encrypt('FLYANJAHZGWMQNZQOJYRUGBZJGG'))
+module.exports = {
+    Enigma
+};
