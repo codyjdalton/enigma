@@ -4,7 +4,7 @@
   "description": "",
   "main": "enigma.js",
   "scripts": {
-    "test": "nyc mocha"
+    "test": "nyc mocha ./lib"
   },
   "keywords": [],
   "author": "",

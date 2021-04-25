@@ -1,4 +1,4 @@
 full-trace: true
-spec: '**/*.spec.js'
+spec: './lib/**/*.spec.js'
 bail: true
 slow: 2000
