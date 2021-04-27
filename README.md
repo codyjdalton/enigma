@@ -2,12 +2,12 @@
 
 # Enigma
 
-Simple implemention of an Enigma machine
+Simple implemention of an Enigma machine and a cracker that determines the most likely rotor position given encrypted text.
 
 ## Getting Started
 ```
-npm install; 
-npm test;
+npm install
+npm test
 ```
 ## Rotor Wiring
 By far the most complex part of the implementation. Our example uses 3 rotors but could easily support as many as needed if alphabets were provided.
@@ -23,4 +23,8 @@ By far the most complex part of the implementation. Our example uses 3 rotors bu
 
 Very simple swapping of two characters. Provided to the class in a string like 'ad cm ey kp'. This would switch A -> D and D -> A respectively.
 ![Plugboard Diagram](https://upload.wikimedia.org/wikipedia/commons/5/53/Enigma_wiring_kleur.svg)
+
+## Cracker
+
+Uses the index of coincidence (IOC) to determine the most likely rotor setting by trying all possible combinations and returning those with the highest likelihood.
 
